@@ -1,0 +1,53 @@
+html[data-petal-cursor] :where(body, body *) { cursor: none !important; }
+html[data-petal-cursor] dialog::backdrop { cursor: none; }
+
+.petal-cursor {
+  position: fixed;
+  z-index: 30;
+  inset: 0 auto auto 0;
+  display: block;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.petal-cursor[data-visible] { visibility: visible; }
+.petal-cursor::backdrop { background: transparent; pointer-events: none; }
+.petal-cursor * { pointer-events: none; }
+
+.petal-cursor-origin {
+  position: absolute;
+  inset: 0 auto auto 0;
+  transform-origin: 0 0;
+}
+
+.petal-cursor-rose {
+  position: absolute;
+  inset: -25px auto auto -25px;
+  width: 50px;
+  height: 50px;
+  max-width: none;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.petal-cursor[data-state="photo"] .petal-cursor-rose { transform: scale(1.12); }
+.petal-cursor[data-state="action"] .petal-cursor-rose { transform: scale(0.92); }
+
+.petal-cursor-fragment {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: block;
+  opacity: 0;
+  background-repeat: no-repeat;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .petal-cursor { display: none; }
+}
+
